@@ -2,48 +2,83 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Blog Landing Page</title>
-  <link rel="stylesheet" href="./Assets/css/blog.css" />
-  <link rel="stylesheet" href="./Assets/css/styles.css" />
-  <link rel="stylesheet" href="./Assets/css/jass.css" />
-  <link rel="stylesheet" href="./Assets/css/form.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog Landing Page</title>
+    <link rel="stylesheet" href="./Assets/css/styles.css" />
+    <link rel="stylesheet" href="./Assets/css/form.css" />
 </head>
 
-  <header class="row toggle">
-    <div class="col">
-    </div>
-    <input type="checkbox" id="theme-switcher" >
-   
-    <div class="col">
-    </div>
-    <div class="row">
-    </div>
-  </header>
+<body>
+    <header class="row toggle">
+        <input type="checkbox"  id="theme-switcher">
+        Dark Mode
+    </header>
 
-  <body>
-    <a href="./blog.html">To the blog!</a>
     <h1>Hello, what's on your mind?</h1>
 
-    <!-- form for username, title, and content  -->
-    <form id="submit">
-      <label for="name">Username:</label><br>
-      <input type="text" id="name" name="name" value=""><br>
-      <label for="title">Title:</label><br>
-      <input type="text" id="title" name="title" value=""><br><br>
-      <label for "content">Content:</label><br>
-      <input type="content" id="content" name="content" value=""><br><br>
-      <input type="submit" value="submit">
-    </form>
+    <div class="container">
+        <div class="image">
+            <img src="./Assets/dumpster-fire-gif-6.gif" width="130" height="130" class="d-inline-block align-top"
+                alt="">
+            <br><a href="./blog.html">To the blog!</a>
+        </div>
+        <form id="submit">
+            <label for="name">Username:</label><br>
+            <input type="text" id="name" name="name" value=""><br><br>
+            <label for="title">Title:</label><br>
+            <input type="text" id="title" name="title" value=""><br><br>
+            <label for="content">Content:</label><br>
+            <input type="content" id="content" name="content" value=""><br><br>
+            <input type="submit" value="submit">
+        </form>
+    </div>
+
+    <div id="blogPosts">
+        <!-- Blog posts will be displayed here -->
+    </div>
 
     <script src="./Assets/js/logic.js"></script>
-    <!-- <script src="blog.js"></script> -->
+    <script src="./Assets/js/blog.js"></script>
 
     <script>
-      document.querySelector('submit-button');
+        // Function to retrieve blog posts from localStorage and display them
+        function displayBlogPosts() {
+            const blogPosts = JSON.parse(localStorage.getItem('blogPosts')) || [];
+            const blogPostsContainer = document.getElementById('blogPosts');
+
+            // Clear previous blog posts
+            blogPostsContainer.innerHTML = '';
+
+            // Loop through blog posts and create HTML elements to display them
+            blogPosts.forEach(blogPost => {
+                const postElement = document.createElement('div');
+                postElement.innerHTML = `
+                    <h2>${blogPost.title}</h2>
+                    <p><strong>Author:</strong> ${blogPost.name}</p>
+                    <p>${blogPost.content}</p>
+                `;
+                blogPostsContainer.appendChild(postElement);
+            });
+        }
+
+        // Call the function to display blog posts when the page loads
+        displayBlogPosts();
     </script>
 
-  </body>
+    <script>
+        const themeSwitcher = document.getElementById('theme-switcher');
+        const body = document.body;
+
+        themeSwitcher.addEventListener('change', function () {
+            if (this.checked) {
+                body.classList.add('dark-mode');
+            } else {
+                body.classList.remove('dark-mode');
+            }
+        });
+    </script>
+
+</body>
 
 </html>

@@ -1,27 +1,31 @@
 // Toggle light/dark mode in Blog's header
-function myFunction() {
+function toggleDarkMode() {
     var element = document.body;
-    element.classList.toggle("darkmode");
+    element.classList.toggle("dark-mode");
 }
 
-let storedBlogposts = JSON.parse(localStorage.getItem("userblogs"))
+// Retrieve stored blog posts from localStorage
+let storedBlogposts = JSON.parse(localStorage.getItem("userblogs"));
 
-for (let i = 0; i < storedBlogposts.length; i++) {
-    let div = document.createElement("div")
-    let h3 = document.createElement("h3")
-    h3.textContent = storedBlogposts[i].title
-    let h5 = document.createElement("h5")
-    h5.textContent = storedBlogposts[i].content
-    let p = document.createElement("p")
-    p.textContent = "Posted By: " + storedBlogposts[i].userName
+// Check if there are stored blog posts before iterating
+if (storedBlogposts) {
+    storedBlogposts.forEach(blogPost => {
+        let card = document.createElement("div");
+        card.classList.add("card");
 
+        let title = document.createElement("h3");
+        title.textContent = blogPost.title;
 
-    div.appendChild(h3)
-    div.appendChild(h5)
-    div.appendChild(p)
+        let content = document.createElement("p");
+        content.textContent = blogPost.content;
 
+        let author = document.createElement("p");
+        author.textContent = "Posted By: " + blogPost.userName;
 
+        card.appendChild(title);
+        card.appendChild(content);
+        card.appendChild(author);
 
-    document.querySelector("#blogPostsSection").appendChild(div)
-    
+        document.querySelector("#blogPostsSection").appendChild(card);
+    });
 }

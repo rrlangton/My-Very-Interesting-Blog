@@ -1,18 +1,45 @@
-/* toggle light/dark mode in the blog's header */
+header {
+    text-align: left;
+}
+
 body {
-    padding: 25px;
-    background-color: lightblue;
-    color: black;
-    font-size: 25px;
+    background-color: lightcyan;
+    color: lightcoral;
+    font-size: 20px;
+    font-family: Arial, Helvetica, sans-serif;
+    text-align: center;
+}
+
+h1 {
+    font-size: 50px;
+    font-family: fantasy;
+    padding-bottom: 50px;
+    text-align: center;
+}
+
+h2 {
+    text-align: center;
+    font-size: 30px;
+    padding-top: 100px;
+    font-family: fantasy;
+}
+
+footer {
+    font-size: 15px;
+    font-style: italic;
+    padding-top: 45px;
+    text-align: center;
+}
+
+.toggle input[type="checkbox"] + .col:before {
+    content: "Light Mode"; /* Default text for the toggle */
+}
+
+.toggle input[type="checkbox"]:checked + .col:before {
+    content: "Dark Mode"; /* Text when toggle is checked */
 }
 
 .dark-mode {
-    background-color: black;
-    color: white
-}
-
-body {
-    background-color: peru;
-    color: darkgreen;
-    font-size: 50px;
+    background-color: #333; /* Dark background color */
+    color: #fff; /* Light text color */
 }

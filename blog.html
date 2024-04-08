@@ -2,29 +2,50 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>My weblog</title>
-  <link rel="stylesheet" href="./Assets/js/blog.js" />
-  <link rel="stylesheet" href="./Assets/js/form.js" />
-  <link rel="stylesheet" href="./Assets/js/logic.js" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Robin's Blog</title>
+    <link rel="stylesheet" href="./Assets/css/blog.css" />
+    <link rel="stylesheet" href="./Assets/css/styles.css" />
 </head>
 
 <body>
-  <a href="./index.html">To the form!</a>
-  <h1>This is my very interesting blog full of interesting thoughts on interesting topics!</h1>
-  <nav class="navbar navbar-light bg-light">
-    <a class="navbar-brand" href="#">
-      <img src="./Assets/dumpster-fire-gif-6.gif" width="130" height="130" class="d-inline-block align-top" alt="">
-    </a>
-  </nav>
-  <div id="blogPostsSection">
-  </div>
+    <header class="row toggle">
+        <input type="checkbox" id="theme-switcher">
+        Dark Mode
+    </header>
+
+    <h1>An interesting blog with interesting thoughts</h1>
+
+    <nav class="navbar navbar-light bg-light">
+    </nav>
+
+    <div id="blogPostsSection">
+        <!-- Blog posts will be displayed here -->
+    </div>
+
+    <h2><a href="./index.html">To the form!</a></h2>
+
+    <footer>
+        <img src="./Assets/raccoon.jpeg" width="100" height="100" class="d-inline-block align-top" alt=""> <br>
+        <a href="https://rrlangton.github.io/Portfolio/">Robin's Portfolio</a>
+    </footer>
+
+    <script src="./Assets/js/blog.js"></script>
+    <script src="./Assets/js/logic.js"></script>
+
+    <script>
+        const themeSwitcher = document.getElementById('theme-switcher');
+        const body = document.body;
+
+        themeSwitcher.addEventListener('change', function () {
+            if (this.checked) {
+                body.classList.add('dark-mode');
+            } else {
+                body.classList.remove('dark-mode');
+            }
+        });
+    </script>
 </body>
 
-<footer>
-  <a href="https://rrlangton.github.io/Portfolio/">My Portfolio</a>
-</footer>
-<script src="./Assets/js/blog.js"></script>
-<script src="./Assets/css/blog.css"></script>
 </html>

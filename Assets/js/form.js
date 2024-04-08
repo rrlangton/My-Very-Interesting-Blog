@@ -1,34 +1,60 @@
-    // querySelector for the button in the HTML
-    // a link the submit button to take the user to the submission page
-    // some if statements that return errors if the field are not given proper inputs 
+// Selecting the form element
+const form = document.getElementById('submit');
 
-const usernameInput = document.querySelector('#user-username');
-const titleInput = document.querySelector('#user-title');
-const contentInput = document.querySelector('#user-content');
-const submitButton = document.querySelector('#submit-button');
+// Event listener for form submission
+form.addEventListener('submit', function(event) {
+    event.preventDefault();
 
-// the "submit button" stores the user's input from the form
-submitButton.addEventListener('click', function(puppies)) {
-    // preventDefault functionality to stop the submit button form simply refreshing the page
-    puppies.preventDefault();
+    // Get existing blog posts from localStorage or initialize an empty array
+    const blogPosts = JSON.parse(localStorage.getItem('blogPosts')) || [];
 
-    const blogPost = {
-        name: usernameInput.value,
-        tile: titleInput.value,
-        content: contentInput.value,
-    }
-    // Checks that all fields are filled out, triggering an alert if left blank
-    if (!usernameInput.value.trim() || !sujectInput.value.trim() || !contentInput.value.trim()) {
+    // Get input values
+    const name = document.getElementById('name').value.trim();
+    const title = document.getElementById('title').value.trim();
+    const content = document.getElementById('content').value.trim();
+
+    // Check if input fields are empty
+    if (!name || !title || !content) {
+        alert('Please fill out all fields.');
         return;
     }
-    // JSON.stringify to turn the user input informtation into a string from the object
-    // localStorage.setItem logic to store the stringified user input data
-    localStorage.setItem('blogPost', JSON.stringify(blogPost));
-  
-    window.location.href ='blog.html';
-    // To clear the text boxes
-    usernameInput.value = '';
-    subjectInput.value = '';
-    contentInput.value = '';
-}
 
+    // Create a new blog post object
+    const newBlogPost = {
+        name: name,
+        title: title,
+        content: content
+    };
+
+    // Add the new blog post to the array
+    blogPosts.push(newBlogPost);
+
+    // Store the updated array back in localStorage
+    localStorage.setItem('blogPosts', JSON.stringify(blogPosts));
+
+   // Clear the form inputs
+   form.reset();
+
+    // Display the updated list of blog posts
+    displayBlogPosts();
+});
+
+// Function to display blog posts from localStorage
+function displayBlogPosts() {
+    const blogPosts = JSON.parse(localStorage.getItem('blogPosts')) || [];
+    const blogPostsContainer = document.getElementById('blogPosts');
+
+    // Clear previous blog posts
+    blogPostsContainer.innerHTML = '';
+
+    // Loop through blog posts and create HTML elements to display them
+    blogPosts.forEach(blogPost => {
+        const postElement = document.createElement('div');
+        postElement.innerHTML = `
+            <h2>${blogPost.title}</h2>
+            <p><strong>Author:</strong> ${blogPost.name}</p>
+            <p>${blogPost.content}</p>
+        `;
+        blogPostsContainer.appendChild(postElement);
+    });
+}
