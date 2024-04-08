@@ -10,6 +10,6 @@ A personal blog to showcase the user's person thoughts and experiences.
 
 ### Sources
 
-Took jass.css file from an activity from class on third party APIs/click events
+Took jass.css file from an activity from class on third party APIs/click events.
 
 
